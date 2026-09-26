@@ -81,6 +81,7 @@ const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
 tap('f2');
 assert.equal(vm.runInContext('S.stars', context), earned, 'replay cannot mint repeat stars');
+vm.runInContext("screen='play';G={turn(){throw Error('bot moved after pause')}};gameMode='challenge';timmy()", context);
 vm.runInContext('parent()', context);
 node('#hold').onpointerdown();
 assert.equal(timers.at(-1).delay, 2000);

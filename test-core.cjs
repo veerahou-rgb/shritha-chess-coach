@@ -81,6 +81,14 @@ const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
 tap('f2');
 assert.equal(vm.runInContext('S.stars', context), earned, 'replay cannot mint repeat stars');
+vm.runInContext('toy(true)', context);
+function toyTap(square){const target={dataset:{q:square},closest(){return this}};node('#toy').onclick({target})}
+toyTap('a2');toyTap('a2');
+assert.equal(vm.runInContext('S.toy.a2', context), '♙', 'same-square tap keeps piece');
+toyTap('a2');toyTap('a4');
+assert.equal(vm.runInContext('S.toy.a4', context), '♙');
+vm.runInContext('rewindToy()', context);
+assert.equal(vm.runInContext('S.toy.a2', context), '♙', 'toy rewind restores position');
 vm.runInContext("screen='play';G={turn(){throw Error('bot moved after pause')}};gameMode='challenge';timmy()", context);
 vm.runInContext('parent()', context);
 node('#hold').onpointerdown();

@@ -48,6 +48,18 @@ assert.match(node('#app').innerHTML, /Jump in an L/);
 for (const square of ['a3', 'b1', 'c3', 'b1', 'd2']) tap(square);
 assert.match(node('#app').innerHTML, /Can Klip-Klop jump over a piece/);
 vm.runInContext("answerCheck('knight',true)", context);
+vm.runInContext('next()', context);
+assert.match(node('#app').innerHTML, /Bea the Bishop/);
+for (const [kind, path] of Object.entries({bishop:['e3','g5','h6'],queen:['d4','g4','h5'],king:['e2','f3','g4'],pawn:['e4','e5','e6','e7','e8']})) {
+  if (kind !== 'bishop') vm.runInContext('next()', context);
+  assert.match(node('#app').innerHTML, new RegExp(({bishop:'Bea the Bishop',queen:'Queen’s roads',king:'King’s careful steps',pawn:'Pawn march'})[kind]));
+  tap('a8');
+  assert.equal(vm.runInContext(`L.${kind}.p`, context), vm.runInContext(`PIECES.${kind}.start`, context), kind+' rejects illegal move');
+  for (const square of path) tap(square);
+  assert.equal(vm.runInContext(`S.pieceDone.${kind}`, context), true);
+}
+vm.runInContext('next()', context);
+assert.match(node('#app').innerHTML, /Who protects the pawn/);
 const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
 tap('f2');

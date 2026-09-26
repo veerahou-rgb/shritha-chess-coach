@@ -38,6 +38,16 @@ function tap(square) {
   const target = { dataset: { q: square }, closest: () => target, classList: { add() {} } };
   node('#b').onclick({ target });
 }
+vm.runInContext('S.world=0;S.boardStage=0;S.boardPops=[];world0()', context);
+tap('a1');
+assert.equal(vm.runInContext('S.boardPops.length', context), 0, 'wrong color does not advance');
+for (const square of ['a8','c8','e8','a1','c1','e1']) tap(square);
+assert.equal(vm.runInContext('S.boardStage', context), 2, 'color activities lead to coordinates');
+tap('e5');
+assert.equal(vm.runInContext('S.world', context), 0);
+tap('e4');
+assert.equal(vm.runInContext('S.world', context), 1);
+vm.runInContext('rook()', context);
 tap('b4');
 assert.equal(vm.runInContext('L.rook.p', context), 'b2');
 tap('f2'); tap('f6'); tap('b6');

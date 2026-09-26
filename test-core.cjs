@@ -9,11 +9,13 @@ const node = selector => {
   return nodes.get(selector);
 };
 const memory = new Map();
+const timers = [];
 const context = vm.createContext({
   document: { querySelector: node, addEventListener() {} },
   localStorage: { getItem: key => memory.get(key) || null, setItem: (key, value) => memory.set(key, value) },
   scrollTo() {},
-  setTimeout() {},
+  setTimeout(callback, delay) { timers.push({ callback, delay }); return timers.length; },
+  clearTimeout() {},
   window: {},
   console,
 });
@@ -31,4 +33,29 @@ assert.equal(vm.runInContext('S.checks.rook', context), true);
 assert.equal(vm.runInContext('S.stars', context), 4, 'help and checks do not remove stars');
 vm.runInContext("recordLearning('rook','mistakes');recordLearning('rook','mistakes');recordLearning('rook','mistakes')", context);
 assert.match(node('#c').textContent, /smaller step/);
+vm.runInContext("S.started=true;S.world=1;L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
+function tap(square) {
+  const target = { dataset: { q: square }, closest: () => target, classList: { add() {} } };
+  node('#b').onclick({ target });
+}
+tap('b4');
+assert.equal(vm.runInContext('L.rook.p', context), 'b2');
+tap('f2'); tap('f6'); tap('b6');
+assert.match(node('#app').innerHTML, /Can Rocky travel through a rock/);
+assert.equal(vm.runInContext('S.rookDone', context), true);
+vm.runInContext("answerCheck('rook',false);next()", context);
+assert.match(node('#app').innerHTML, /Jump in an L/);
+for (const square of ['a3', 'b1', 'c3', 'b1', 'd2']) tap(square);
+assert.match(node('#app').innerHTML, /Can Klip-Klop jump over a piece/);
+vm.runInContext("answerCheck('knight',true)", context);
+const earned = vm.runInContext('S.stars', context);
+vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
+tap('f2');
+assert.equal(vm.runInContext('S.stars', context), earned, 'replay cannot mint repeat stars');
+vm.runInContext('parent()', context);
+node('#hold').onpointerdown();
+assert.equal(timers.at(-1).delay, 2000);
+timers.at(-1).callback();
+assert.match(node('#app').innerHTML, /Parent Dashboard/);
+node('#hold').onpointerup();
 console.log('Core lesson checks passed');

@@ -58,6 +58,13 @@ assert.match(node('#app').innerHTML, /Jump in an L/);
 for (const square of ['a3', 'b1', 'c3', 'b1', 'd2']) tap(square);
 assert.match(node('#app').innerHTML, /Can Klip-Klop jump over a piece/);
 vm.runInContext("answerCheck('knight',true)", context);
+vm.runInContext('S.reviewDue.rook=Date.now()-1;next()', context);
+assert.match(node('#app').innerHTML, /Rocky’s new road/);
+const beforeReviewStars=vm.runInContext('S.stars', context);
+const reviewTarget={dataset:{q:'h3'},closest(){return this},classList:{add(){}}};
+node('#reviewSkillBoard').onclick({target:reviewTarget});
+assert.equal(vm.runInContext('S.stars', context),beforeReviewStars,'quiet review does not remove rewards');
+assert.ok(vm.runInContext('S.reviewDue.rook', context)>Date.now());
 vm.runInContext('next()', context);
 assert.match(node('#app').innerHTML, /Bea the Bishop/);
 for (const [kind, path] of Object.entries({bishop:['e3','g5','h6'],queen:['d4','g4','h5'],king:['e2','f3','g4'],pawn:['e4','e5','e6','e7','e8']})) {

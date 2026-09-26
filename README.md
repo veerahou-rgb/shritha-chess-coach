@@ -11,9 +11,9 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 - Bishop, queen, king, and pawn movement adventures with legal-move feedback, Help, Again, Rewind, stars, and saved progress.
 - World 2 legal capture, escape from check, and pawn promotion puzzles, Penny's defended pawn, and a stalemate check.
 - Foxy's knight fork and a real rules-engine checkmate finishing lesson with consequence, retry, and saved position.
-- Timmy Turtle legal game, two-sided Chess Playground, and rules-off Toy Box.
+- Timmy Turtle legal game, quiet Foxy Challenge against a simple capture-seeking bot, two-sided Chess Playground, and rules-off Toy Box.
 - Nearby Adventure Map, Puzzle Adventure, My Kingdom, My Chess Powers, Coach Review board replay and move comparison, parent hold gate, weekly real-board idea, Play Together, settings, and repeat-audio button.
-- Cumulative stars are never spent. Lesson progress and saved game survive page refresh.
+- Cumulative stars are never spent. Lesson progress and saved game survive page refresh. Rook and knight understanding checks schedule later, varied-position reviews; elapsed time alone never removes credit.
 
 ## Verification performed
 
@@ -22,12 +22,12 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 - On the published browser: played bishop → queen → king → pawn, verified bishop illegal move and Rewind, and resumed the queen midway after reload.
 - On the published browser: tried a non-mating move in Finish Together, rewound, played Qg7#, and received authentic checkmate. Saved queen position survived page reload; Rewind reset it.
 - On the published browser: World Map and Puzzle Adventure navigation, staged Rocky Help, World 2 capture (including a legal wrong move and Rewind), escape from check, promotion, and wrong/right stalemate choice. Coach Review alternative g3 updated the board; Rewind restored the original g2 pawn.
-- On the published browser: Timmy e2-e4 and reply, saved-game resume, Toy Box creative move, Chess Playground Fool's Mate and review replay, parent hold entry, Settings, and Play Together.
-- The new World 0 color sequence was run in the core test; it has not been played in a fresh public-browser profile. Mobile/tablet visual testing has not yet been performed.
+- On the published browser: Timmy e2-e4 and reply, saved-game resume, Toy Box creative move, Chess Playground Fool's Mate and review replay, parent hold entry, Settings, and Play Together. Foxy Challenge answered e2-e4; its Help offered no live hint. Pause remained on the Play screen after the bot timer, and saved Challenge resumed after reload.
+- The new World 0 color sequence and due review path were run in the core test; they have not been played in a fresh/due public-browser profile. Mobile/tablet visual testing has not yet been performed.
 
 ## Scope still to build
 
-This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has color and coordinate activities; World 2 has four short activities plus Penny; World 3 has Foxy and a finishing puzzle. The bot chooses random legal moves. Review selects one recent move and compares a legal alternative, but does not evaluate which move is stronger. Mastery is not based on varied positions, retention, or natural game use. There is no multi-move guided replay, What If mode, full session adaptation, comprehensive lesson narration, stronger opponent, challenge mode, or cross-device sync. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.
+This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has color and coordinate activities; World 2 has four short activities plus Penny; World 3 has Foxy and a finishing puzzle. Timmy chooses random legal moves; Foxy only prioritizes immediate captures, with no deeper search. Review selects one recent move and compares a legal alternative, but does not evaluate which move is stronger. The quiet review samples one varied position, but mastery is not yet inferred from repeated varied positions, retention, and natural game use. There is no multi-move guided replay, What If mode, full session adaptation, comprehensive lesson narration, stronger opponent, challenge mode, or cross-device sync. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.
 
 ## Development
 

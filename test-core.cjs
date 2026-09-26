@@ -58,7 +58,7 @@ for (const [kind, path] of Object.entries({bishop:['e3','g5','h6'],queen:['d4','
   for (const square of path) tap(square);
   assert.equal(vm.runInContext(`S.pieceDone.${kind}`, context), true);
 }
-vm.runInContext('next()', context);
+vm.runInContext('S.combatDone={capture:true,escape:true,promotion:true};next()', context);
 assert.match(node('#app').innerHTML, /Who protects the pawn/);
 const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);

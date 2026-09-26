@@ -2,29 +2,31 @@
 
 Public preview: https://veerahou-rgb.github.io/shritha-chess-coach/
 
-A child-friendly chess coaching prototype. Open the preview in a browser. Progress is stored on that device in browser storage.
+A child-friendly chess coach prototype. Open the preview in a browser. Progress stays on that device in browser local storage; no account is needed.
 
-## Playable today
+## Playable now
 
-- New-child welcome, World 0 square finding, Rocky rook tracks with a blocker, Klip-Klop knight jumps, Penny's defended pawn, and Foxy's knight fork.
-- Legal chess in Chess Playground, a basic Timmy Turtle bot, and a rules-off Toy Box.
-- Pause and resume a saved game, lesson progress, cumulative stars, Help, Again, Rewind, and short understanding checks.
-- My Kingdom, My Chess Powers, Coach Review replay of a recent White position, parent hold gate, Play Together, and basic audio repeat.
+- New-child welcome and board-coordinate activity with edge labels.
+- Rocky's rook star route with a blocker and Klip-Klop's knight jumps, each followed by a quiet understanding question.
+- Bishop, queen, king, and pawn movement adventures with legal-move feedback, Help, Again, Rewind, stars, and saved progress.
+- Penny's defended pawn, Foxy's knight fork, and a real rules-engine checkmate finishing lesson with consequence and retry.
+- Timmy Turtle legal game, two-sided Chess Playground, and rules-off Toy Box.
+- My Kingdom, My Chess Powers, Coach Review replay, parent hold gate, weekly real-board idea, Play Together, settings, and repeat-audio button.
+- Cumulative stars are never spent. Lesson progress and saved game survive page refresh.
 
 ## Verification performed
 
-- Public URL opened; onboarding and World 0 completed.
-- Rocky blocked square rejected; rook and knight paths completed; Penny and Foxy completed.
-- Tap and drag rook interaction; cumulative stars and partial rook progress survived refresh.
-- Legal e2-e4 and Timmy reply; saved Timmy game resumed after refresh and rewound.
-- Playground Fool's Mate ended as checkmate; Toy Box moved a piece with rules off.
-- Core lesson checks: `node test-core.cjs` (rook blocker, incorrect/correct understanding check, stars unchanged, rescue cue).
-- The latest changes to understanding checks and telemetry passed syntax and core checks, but have not been rechecked in the public browser after the browser session stalled.
+- Ran `node test-core.cjs` after latest code changes: all checks passed. It exercises rook rules, incorrect/correct checks, rescue cue, progression through bishop/queen/king/pawn, illegal movement, cumulative stars, and parent gate timer.
+- On the published browser: played welcome → World 0 → Rocky → knight → Penny → Foxy; tried wrong answers and illegal moves; verified rook drag, Help, Rewind, and stars after refresh.
+- On the published browser: played bishop → queen → king → pawn, verified bishop illegal move and Rewind, and resumed the queen midway after reload.
+- On the published browser: tried a non-mating move in Finish Together, rewound, played Qg7#, and received authentic checkmate. The final saved-position change was checked in the core test but has not yet been rechecked after deployment.
+- On the published browser: Timmy e2-e4 and reply, saved-game resume, Toy Box creative move, Chess Playground Fool's Mate and review replay, parent hold entry, Settings, and Play Together.
+- Mobile/tablet visual testing has not yet been performed.
 
-## Current limits
+## Scope still to build
 
-This is not the complete frozen product or a master-level curriculum. World 2 and World 3 currently have one activity each. Timmy chooses random legal moves, not a pedagogical strategy. Review replays a recent position without explaining a specific blunder or choosing a stronger move. There is no varied-position mastery or spaced-retention engine, guided multi-move replay, What If exploration, PIN-backed parent gate, lesson narration throughout, cross-device sync, or polished full-session adaptation. The external chess.js script requires network access. The parent hold gate and mobile layout need fresh live verification.
+This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has one activity; World 2 has Penny; World 3 has Foxy and a finishing puzzle. The bot chooses random legal moves. Review replays a recent position without tactical analysis, and mastery is not based on varied positions, retention, or natural game use. There is no multi-move guided replay, What If mode, full session adaptation, comprehensive lesson narration, stronger opponent, challenge mode, or cross-device sync. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.
 
 ## Development
 
-The site is a single static `index.html` hosted with GitHub Pages from `main`. No build step is needed. Open it in a browser, or run `node test-core.cjs` for the core rule checks.
+The site is a static `index.html` hosted by GitHub Pages from `main`. No build step is needed. `node test-core.cjs` runs the local core tests.

@@ -61,6 +61,7 @@ assert.match(node('#movieReplay').textContent, /Chessy’s voice/);
 node('#movieReplay').onclick();
 assert.equal(node('.lesson-film').muted,true,'beep-only soundtrack remains muted');
 assert.match(spoken.at(-1),/Rocky the Rook/,'movie button starts spoken Rocky narration');
+assert.equal(vm.runInContext("window.speechSynthesis=null;playMovieVoice('rook')",context),false,'voice fallback is honest when browser has no speech engine');
 assert.equal(node('#movieTry').hidden,true,'practice stays locked until video ends');
 finishMovie();
 assert.equal(node('#movieTry').hidden,false);

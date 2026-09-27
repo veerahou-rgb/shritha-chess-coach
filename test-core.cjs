@@ -25,6 +25,8 @@ assert.equal(vm.runInContext("line('b2','b4')", context), false, 'rook cannot la
 assert.equal(vm.runInContext("line('b2','b6')", context), false, 'rook cannot pass rock');
 assert.equal(vm.runInContext("line('b2','f2')", context), true, 'rook straight path');
 assert.equal(vm.runInContext("line('b2','c3')", context), false, 'rook diagonal rejection');
+assert.equal(vm.runInContext("nextGuideStep('c3',['d2','a3'],(a,b)=>Math.abs(F.indexOf(a[0])-F.indexOf(b[0]))*Math.abs(+a[1]-+b[1])===2)", context).length, 2, 'knight Help finds a reachable intermediate square');
+assert.equal(vm.runInContext("nextGuideStep('b2',['b6'],line)", context).length, 2, 'rook Help can route around the rock');
 vm.runInContext("S.started=true;S.stars=4;quietCheck('rook');answerCheck('rook',true)", context);
 assert.equal(vm.runInContext('S.checks?.rook', context), undefined, 'wrong understanding answer remains open');
 assert.match(node('#c').textContent, /Try once more/);

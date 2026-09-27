@@ -45,6 +45,8 @@ vm.runInContext('settings()', context);
 assert.match(node('#app').innerHTML, /Video and voice/);
 assert.match(node('#app').innerHTML, /Hear Chessy/);
 assert.match(html, /MOVIE_NARRATION/);
+assert.equal(Object.keys(vm.runInContext('MOVIE_NARRATION',context)).length,12,'all twelve lessons have narration');
+assert.ok(Object.values(vm.runInContext('MOVIE_NARRATION',context)).every(line=>line.split(/\s+/).length<=18),'narration is short enough for the eight-second movie');
 vm.runInContext("S.started=true;S.stars=4;quietCheck('rook');answerCheck('rook',true)", context);
 assert.equal(vm.runInContext('S.checks?.rook', context), undefined, 'wrong understanding answer remains open');
 assert.match(node('#c').textContent, /Try once more/);
@@ -61,7 +63,7 @@ assert.doesNotMatch(node('#movieSlot').innerHTML, /autoplay|controls/, 'sound mu
 assert.match(node('#movieReplay').textContent, /Chessy’s voice/);
 node('#movieReplay').onclick();
 assert.equal(node('.lesson-film').muted,true,'beep-only soundtrack remains muted');
-assert.match(spoken.at(-1),/Rocky the Rook/,'movie button starts spoken Rocky narration');
+assert.match(spoken.at(-1),/Meet Rocky/,'movie button starts spoken Rocky narration');
 assert.equal(vm.runInContext("window.speechSynthesis=null;playMovieVoice('rook')",context),false,'voice fallback is honest when browser has no speech engine');
 assert.equal(node('#movieTry').hidden,true,'practice stays locked until video ends');
 finishMovie();

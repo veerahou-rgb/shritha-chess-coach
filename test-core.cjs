@@ -10,13 +10,17 @@ const node = selector => {
 };
 const memory = new Map();
 const timers = [];
+const spoken=[];
+const voice={cancel(){},speak(u){spoken.push(u.text)},getVoices(){return []}};
 const context = vm.createContext({
   document: { querySelector: node, addEventListener() {} },
   localStorage: { getItem: key => memory.get(key) || null, setItem: (key, value) => memory.set(key, value) },
   scrollTo() {},
   setTimeout(callback, delay) { timers.push({ callback, delay }); return timers.length; },
   clearTimeout() {},
-  window: { lessonVideos: Object.fromEntries(['board','rook','knight','bishop','queen','king','pawn','capture','escape','promotion','penny','foxy'].map(k=>[k,'data:video/mp4;base64,AAAA'])) },
+  window: { speechSynthesis:voice, lessonVideos: Object.fromEntries(['board','rook','knight','bishop','queen','king','pawn','capture','escape','promotion','penny','foxy'].map(k=>[k,'data:video/mp4;base64,AAAA'])) },
+  speechSynthesis:voice,
+  SpeechSynthesisUtterance: class { constructor(text){this.text=text} },
   console,
 });
 vm.runInContext(js, context);
@@ -37,8 +41,9 @@ assert.equal(vm.runInContext("line('b2','c3')", context), false, 'rook diagonal 
 assert.equal(vm.runInContext("nextGuideStep('c3',['d2','a3'],(a,b)=>Math.abs(F.indexOf(a[0])-F.indexOf(b[0]))*Math.abs(+a[1]-+b[1])===2)", context).length, 2, 'knight Help finds a reachable intermediate square');
 assert.equal(vm.runInContext("nextGuideStep('b2',['b6'],line)", context).length, 2, 'rook Help can route around the rock');
 vm.runInContext('settings()', context);
-assert.match(node('#app').innerHTML, /Video comfort/);
-assert.match(node('#app').innerHTML, /Recorded child narration has not been added yet/);
+assert.match(node('#app').innerHTML, /Video and voice/);
+assert.match(node('#app').innerHTML, /Hear Chessy/);
+assert.match(html, /MOVIE_NARRATION/);
 vm.runInContext("S.started=true;S.stars=4;quietCheck('rook');answerCheck('rook',true)", context);
 assert.equal(vm.runInContext('S.checks?.rook', context), undefined, 'wrong understanding answer remains open');
 assert.match(node('#c').textContent, /Try once more/);
@@ -51,10 +56,11 @@ vm.runInContext("S.started=true;S.world=1;L.rook={p:'b2',z:['b6','f2','f6'],h:[]
 assert.match(node('#app').innerHTML, /Watch first · Chessy’s mini movie/);
 assert.match(node('#app').innerHTML,/Meet Rocky the Rook/);
 assert.match(node('#movieSlot').innerHTML, /<video/);
-assert.doesNotMatch(node('#movieSlot').innerHTML, /autoplay|muted/, 'movie must not start silently');
-assert.match(node('#movieReplay').textContent, /Play movie with sound/);
+assert.doesNotMatch(node('#movieSlot').innerHTML, /autoplay|controls/, 'sound must start only from the voice button');
+assert.match(node('#movieReplay').textContent, /Chessy’s voice/);
 node('#movieReplay').onclick();
-assert.equal(node('.lesson-film').muted,false,'child playback is unmuted');
+assert.equal(node('.lesson-film').muted,true,'beep-only soundtrack remains muted');
+assert.match(spoken.at(-1),/Rocky the Rook/,'movie button starts spoken Rocky narration');
 assert.equal(node('#movieTry').hidden,true,'practice stays locked until video ends');
 finishMovie();
 assert.equal(node('#movieTry').hidden,false);

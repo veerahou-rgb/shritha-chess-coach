@@ -28,6 +28,18 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 - The class catalog was checked for 12 video and 12 practice entries in the core test. The new World 0 color sequence and due review path were run in the core test; they have not been played in a fresh/due public-browser profile. Mobile/tablet visual testing has not yet been performed.
 - Rechecked the published Rocky board at 1363×936: board measured 618 pixels, Help drew a visible line, and the page required no vertical scroll. Replayed the parent hold gate. Tested the new MP4 first-launch board video and Rocky video in a fresh public-browser profile: each finished and unlocked its activity; knight video also loaded. Captions were moved clear of the player controls after visual inspection.
 
+## ChessKid feature benchmark (original implementation)
+
+| Experience | Current state | Needed for comparable breadth |
+|---|---|---|
+| Watch → learn → practice | 12 short captioned movies and linked exercises | Recorded child-friendly narration, richer animation, many more varied lessons |
+| Puzzles and workouts | Several replayable puzzles and a finishing challenge | A tagged, varied puzzle bank, adaptive difficulty, endgame workouts |
+| Full games | Legal chess rules, local two-player, Timmy and Foxy | Stronger bot levels and truthful engine-based game review |
+| Live play with children | Not built | Accounts, server matchmaking, child protection, moderation and parent controls |
+| Parents and progress | Local progress, hold gate, weekly real-board idea | Optional PIN, cross-device sync, assignments and detailed parent controls |
+
+ChessKid’s branding, characters, videos, narration, curriculum text, and game data are not reused. This project needs original assets and content.
+
 ## Scope still to build
 
 This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has color and coordinate activities; World 2 has four short activities plus Penny; World 3 has Foxy and a finishing puzzle. Timmy chooses random legal moves; Foxy only prioritizes immediate captures, with no deeper search. Review selects one recent move and compares a legal alternative, but does not evaluate which move is stronger. The quiet review samples one varied position, but mastery is not yet inferred from repeated varied positions, retention, and natural game use. There is no equivalent to ChessKid’s full lesson library, live child matchmaking, tournaments, clubs, puzzle database, multi-move guided replay, What If mode, full session adaptation, comprehensive lesson narration, stronger opponent, challenge mode, or cross-device sync. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.

@@ -125,9 +125,16 @@ const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
 tap('f2');
 assert.equal(vm.runInContext('S.stars', context), earned, 'replay cannot mint repeat stars');
+vm.runInContext("rewindTrack('rook')",context);
+assert.equal(vm.runInContext('L.rook.p',context),'b2','rewind restores rook square');
+assert.ok(Array.from(vm.runInContext('L.rook.z',context)).includes('f2'),'rewind restores collected goal');
+assert.equal(vm.runInContext('S.stars',context),earned,'rewind never removes earned stars');
 vm.runInContext('L.rook.z=[];rook()', context);
 assert.match(node('#app').innerHTML, /Collect Rocky’s track stars/);
-assert.deepEqual(Array.from(vm.runInContext('L.rook.z', context)), ['b6','f2','f6'], 'completed route can be practiced again');
+assert.deepEqual(Array.from(vm.runInContext('L.rook.z', context)), ['h3','h6','c6'], 'completed route starts a varied practice');
+vm.runInContext("L.knight.z=[];knight()",context);
+assert.equal(vm.runInContext('L.knight.p',context),'d4');
+assert.deepEqual(Array.from(vm.runInContext('L.knight.z',context)),['f5','h6','g4']);
 vm.runInContext('toy(true)', context);
 function toyTap(square){const target={dataset:{q:square},closest(){return this}};node('#toy').onclick({target})}
 toyTap('a2');toyTap('a2');

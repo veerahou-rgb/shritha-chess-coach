@@ -49,6 +49,7 @@ vm.runInContext("recordLearning('rook','mistakes');recordLearning('rook','mistak
 assert.match(node('#c').textContent, /smaller step/);
 vm.runInContext("S.started=true;S.world=1;L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
 assert.match(node('#app').innerHTML, /Watch first · Chessy’s mini movie/);
+assert.match(node('#app').innerHTML,/Meet Rocky the Rook/);
 assert.match(node('#movieSlot').innerHTML, /<video/);
 assert.doesNotMatch(node('#movieSlot').innerHTML, /autoplay|muted/, 'movie must not start silently');
 assert.match(node('#movieReplay').textContent, /Play movie with sound/);

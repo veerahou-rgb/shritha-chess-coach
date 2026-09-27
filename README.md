@@ -8,13 +8,13 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 
 - New-child welcome, three light and three dark square taps, then a coordinate activity with board-edge labels.
 - Rocky's rook star route with a blocker and Klip-Klop's knight jumps, each followed by a quiet understanding question.
-- Narrated, animated board demonstrations before Rocky, Klip-Klop, the other piece lessons, World 2 moves, Penny, and Foxy. These are in-app animations, not recorded video files.
+- Twelve short MP4 lessons show the board and move before practice: board basics, Rocky, Klip-Klop, bishop, queen, king, pawn, capture, escape, promotion, Penny, and Foxy. Practice unlocks after the video finishes. Videos have large captions and gentle chimes; they have no spoken narration.
 - Bishop, queen, king, and pawn movement adventures with legal-move feedback, Help, Again, Rewind, stars, and saved progress.
 - World 2 legal capture, escape from check, and pawn promotion puzzles, Penny's defended pawn, and a stalemate check.
 - Foxy's knight fork and a real rules-engine checkmate finishing lesson with consequence, retry, and saved position.
 - Timmy Turtle legal game, quiet Foxy Challenge against a simple capture-seeking bot, two-sided Chess Playground, and rules-off Toy Box.
 - Nearby Adventure Map, Puzzle Adventure, My Kingdom, My Chess Powers, Coach Review board replay and move comparison, parent hold gate, weekly real-board idea, Play Together, settings, and repeat-audio button.
-- Visual Help lines on movement boards; board screens hide the header and bottom navigation to leave more room. Parent settings let a parent preview an available English device voice, change speaking pace, or keep captions while muting speech.
+- Visual Help lines on movement boards; board screens hide the header and bottom navigation to leave more room. Child lessons now use video instead of synthetic browser speech.
 - Cumulative stars are never spent. Lesson progress and saved game survive page refresh. Rook and knight understanding checks schedule later, varied-position reviews; elapsed time alone never removes credit.
 
 ## Verification performed
@@ -26,7 +26,7 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 - On the published browser: World Map and Puzzle Adventure navigation, staged Rocky Help, World 2 capture (including a legal wrong move and Rewind), escape from check, promotion, and wrong/right stalemate choice. Coach Review alternative g3 updated the board; Rewind restored the original g2 pawn.
 - On the published browser: Timmy e2-e4 and reply, saved-game resume, Toy Box creative move, Chess Playground Fool's Mate and review replay, parent hold entry, Settings, and Play Together. Foxy Challenge answered e2-e4; its Help offered no live hint. Pause remained on the Play screen after the bot timer, and saved Challenge resumed after reload.
 - The new World 0 color sequence and due review path were run in the core test; they have not been played in a fresh/due public-browser profile. Mobile/tablet visual testing has not yet been performed.
-- Rechecked the published Rocky board at 1363×936: board measured 618 pixels, Help drew a visible line, and the page required no vertical scroll. Replayed the parent hold gate and confirmed the voice controls and saved pace/mute settings. Audio sound quality could not be assessed through the browser automation.
+- Rechecked the published Rocky board at 1363×936: board measured 618 pixels, Help drew a visible line, and the page required no vertical scroll. Replayed the parent hold gate. Tested the new MP4 first-launch board video and Rocky video in a fresh public-browser profile: each finished and unlocked its activity; knight video also loaded. Captions were moved clear of the player controls after visual inspection.
 
 ## Scope still to build
 

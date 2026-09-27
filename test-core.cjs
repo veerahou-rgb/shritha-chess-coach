@@ -34,6 +34,13 @@ assert.equal(vm.runInContext('S.stars', context), 4, 'help and checks do not rem
 vm.runInContext("recordLearning('rook','mistakes');recordLearning('rook','mistakes');recordLearning('rook','mistakes')", context);
 assert.match(node('#c').textContent, /smaller step/);
 vm.runInContext("S.started=true;S.world=1;L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);
+assert.match(node('#app').innerHTML, /Watch first · Rocky/);
+timers.at(-1).callback();
+assert.match(node('#app').innerHTML, /Watch me roll/);
+timers.at(-1).callback();
+assert.match(node('#app').innerHTML, /Now you try/);
+assert.equal(vm.runInContext('S.intros.rook', context), true);
+vm.runInContext('rook()', context);
 function tap(square) {
   const target = { dataset: { q: square }, closest: () => target, classList: { add() {} } };
   node('#b').onclick({ target });
@@ -54,6 +61,10 @@ tap('f2'); tap('f6'); tap('b6');
 assert.match(node('#app').innerHTML, /Can Rocky travel through a rock/);
 assert.equal(vm.runInContext('S.rookDone', context), true);
 vm.runInContext("answerCheck('rook',false);next()", context);
+assert.match(node('#app').innerHTML, /Watch first · Piece friends/);
+timers.at(-1).callback();timers.at(-1).callback();
+assert.equal(vm.runInContext('S.intros.knight', context), true);
+vm.runInContext('knight()', context);
 assert.match(node('#app').innerHTML, /Jump in an L/);
 for (const square of ['a3', 'b1', 'c3', 'b1', 'd2']) tap(square);
 assert.match(node('#app').innerHTML, /Can Klip-Klop jump over a piece/);
@@ -66,9 +77,12 @@ node('#reviewSkillBoard').onclick({target:reviewTarget});
 assert.equal(vm.runInContext('S.stars', context),beforeReviewStars,'quiet review does not remove rewards');
 assert.ok(vm.runInContext('S.reviewDue.rook', context)>Date.now());
 vm.runInContext('next()', context);
-assert.match(node('#app').innerHTML, /Bea the Bishop/);
 for (const [kind, path] of Object.entries({bishop:['e3','g5','h6'],queen:['d4','g4','h5'],king:['e2','f3','g4'],pawn:['e4','e5','e6','e7','e8']})) {
   if (kind !== 'bishop') vm.runInContext('next()', context);
+  assert.match(node('#app').innerHTML, /Watch first · Piece friends/);
+  timers.at(-1).callback();timers.at(-1).callback();
+  assert.equal(vm.runInContext(`S.intros.${kind}`, context), true);
+  vm.runInContext(`pieceAdventure('${kind}')`, context);
   assert.match(node('#app').innerHTML, new RegExp(({bishop:'Bea the Bishop',queen:'Queen’s roads',king:'King’s careful steps',pawn:'Pawn march'})[kind]));
   tap('a8');
   assert.equal(vm.runInContext(`L.${kind}.p`, context), vm.runInContext(`PIECES.${kind}.start`, context), kind+' rejects illegal move');

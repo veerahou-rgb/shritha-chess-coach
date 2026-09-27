@@ -21,6 +21,14 @@ const context = vm.createContext({
 });
 vm.runInContext(js, context);
 const finishMovie=()=>node('.lesson-film').onended();
+vm.runInContext('explore()',context);
+assert.match(node('#app').innerHTML,/Open classes/);
+vm.runInContext('classes()',context);
+assert.match(node('#app').innerHTML,/Chessy’s Classes/);
+assert.equal((node('#app').innerHTML.match(/Watch with sound/g)||[]).length,12,'all twelve video classes have an entry');
+assert.equal((node('#app').innerHTML.match(/Try it/g)||[]).length,12,'each class has practice');
+vm.runInContext("classMovie('rook')",context);
+assert.match(node('#movieSlot').innerHTML,/<video/);
 assert.equal(vm.runInContext("line('b2','b2')", context), false, 'rook stays put');
 assert.equal(vm.runInContext("line('b2','b4')", context), false, 'rook cannot land on rock');
 assert.equal(vm.runInContext("line('b2','b6')", context), false, 'rook cannot pass rock');

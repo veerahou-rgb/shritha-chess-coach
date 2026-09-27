@@ -94,6 +94,10 @@ for (const [kind, path] of Object.entries({bishop:['e3','g5','h6'],queen:['d4','
   assert.equal(vm.runInContext(`S.pieceDone.${kind}`, context), true);
 }
 vm.runInContext('S.combatDone={capture:true,escape:true,promotion:true};next()', context);
+assert.match(node('#app').innerHTML, /Watch first · Penny Panda/);
+timers.at(-1).callback();timers.at(-1).callback();
+assert.equal(vm.runInContext('S.intros.penny', context), true);
+vm.runInContext('penny()', context);
 assert.match(node('#app').innerHTML, /Who protects the pawn/);
 const earned = vm.runInContext('S.stars', context);
 vm.runInContext("L.rook={p:'b2',z:['b6','f2','f6'],h:[]};rook()", context);

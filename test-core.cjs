@@ -30,7 +30,7 @@ assert.equal(vm.runInContext("nextGuideStep('c3',['d2','a3'],(a,b)=>Math.abs(F.i
 assert.equal(vm.runInContext("nextGuideStep('b2',['b6'],line)", context).length, 2, 'rook Help can route around the rock');
 vm.runInContext('settings()', context);
 assert.match(node('#app').innerHTML, /Video comfort/);
-assert.match(node('#app').innerHTML, /instead of a synthetic coach voice/);
+assert.match(node('#app').innerHTML, /Recorded child narration has not been added yet/);
 vm.runInContext("S.started=true;S.stars=4;quietCheck('rook');answerCheck('rook',true)", context);
 assert.equal(vm.runInContext('S.checks?.rook', context), undefined, 'wrong understanding answer remains open');
 assert.match(node('#c').textContent, /Try once more/);

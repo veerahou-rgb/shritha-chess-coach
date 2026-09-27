@@ -8,13 +8,13 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 
 - New-child welcome with an original gently animated owl (motion respects reduced-motion settings), three light and three dark square taps, then a coordinate activity with board-edge labels.
 - Rocky's rook star route with a blocker and Klip-Klop's knight jumps, each followed by a quiet understanding question. Completed routes now offer two alternate practice layouts per piece; Rewind restores collected goals without taking away stars.
-- Explore → Classes now groups twelve replayable video lessons, each with a matching Try it practice button. The twelve short MP4 lessons show the board and move before practice: board basics, Rocky, Klip-Klop, bishop, queen, king, pawn, capture, escape, promotion, Penny, and Foxy. Each movie now names its topic, and practice unlocks after the video finishes. Videos have large captions and gentle chimes; they have no spoken narration.
+- Explore → Classes now groups twelve replayable video lessons, each with a matching Try it practice button. The twelve short MP4 lessons show the board and move before practice: board basics, Rocky, Klip-Klop, bishop, queen, king, pawn, capture, escape, promotion, Penny, and Foxy. Each movie names its topic and practice unlocks after it finishes. The embedded chimes stay muted; tapping the voice button plays an original Chessy narration through the browser's English speech voice. Captions remain visible. Parent Settings has a voice test button.
 - Bishop, queen, king, and pawn movement adventures with legal-move feedback, Help, Again, Rewind, stars, and saved progress.
 - World 2 legal capture, escape from check, and pawn promotion puzzles, Penny's defended pawn, and a stalemate check.
 - Foxy's knight fork and a real rules-engine checkmate finishing lesson with consequence, retry, and saved position.
 - Timmy Turtle legal game, quiet Foxy Challenge against a simple capture-seeking bot, two-sided Chess Playground, and rules-off Toy Box.
 - Nearby Adventure Map, Puzzle Adventure, My Kingdom, My Chess Powers, Coach Review board replay and move comparison, parent hold gate, weekly real-board idea, Play Together, settings, and repeat-audio button.
-- Visual Help lines on movement boards; board screens hide the header and bottom navigation to leave more room. Child lessons now use video instead of synthetic browser speech.
+- Visual Help lines on movement boards; board screens hide the header and bottom navigation to leave more room. Spoken movie narration and repeat audio use the browser's speech engine; voice quality and availability depend on the device and browser.
 - Cumulative stars are never spent. Lesson progress and saved game survive page refresh. Rook and knight understanding checks schedule later, varied-position reviews; elapsed time alone never removes credit.
 
 ## Verification performed
@@ -32,7 +32,7 @@ A child-friendly chess coach prototype. Open the preview in a browser. Progress 
 
 | Experience | Current state | Needed for comparable breadth |
 |---|---|---|
-| Watch → learn → practice | 12 short captioned movies and linked exercises | Recorded child-friendly narration, richer animation, many more varied lessons |
+| Watch → learn → practice | 12 short captioned movies, browser-spoken narration, and linked exercises | Professionally recorded child-friendly narration, richer animation, many more varied lessons |
 | Puzzles and workouts | Several replayable puzzles and a finishing challenge | A tagged, varied puzzle bank, adaptive difficulty, endgame workouts |
 | Full games | Legal chess rules, local two-player, Timmy and Foxy | Stronger bot levels and truthful engine-based game review |
 | Live play with children | Not built | Accounts, server matchmaking, child protection, moderation and parent controls |
@@ -42,7 +42,7 @@ ChessKid’s branding, characters, videos, narration, curriculum text, and game 
 
 ## Scope still to build
 
-This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has color and coordinate activities; World 2 has four short activities plus Penny; World 3 has Foxy and a finishing puzzle. Timmy chooses random legal moves; Foxy checks each legal reply against one possible child response and values material and central squares; this is still a shallow beginner bot, not a strong engine. Review selects one recent move and compares a legal alternative, but does not evaluate which move is stronger. The quiet review samples one varied position, but mastery is not yet inferred from repeated varied positions, retention, and natural game use. There is no equivalent to ChessKid’s full lesson library, live child matchmaking, tournaments, clubs, puzzle database, multi-move guided replay, What If mode, full session adaptation, comprehensive lesson narration, stronger opponent, challenge mode, or cross-device sync. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.
+This is **not** the complete frozen product or a master-level curriculum. The 34 micro-levels described in the source curriculum are not all present. World 0 has color and coordinate activities; World 2 has four short activities plus Penny; World 3 has Foxy and a finishing puzzle. Timmy chooses random legal moves; Foxy checks each legal reply against one possible child response and values material and central squares; this is still a shallow beginner bot, not a strong engine. Review selects one recent move and compares a legal alternative, but does not evaluate which move is stronger. The quiet review samples one varied position, but mastery is not yet inferred from repeated varied positions, retention, and natural game use. There is no equivalent to ChessKid’s full lesson library, live child matchmaking, tournaments, clubs, puzzle database, multi-move guided replay, What If mode, full session adaptation, professionally recorded narration, stronger opponent, challenge mode, or cross-device sync. Browser speech voices vary by device and may not sound childlike. The parent hold gate has no optional PIN. chess.js loads from an external CDN and needs network access.
 
 ## Development
 

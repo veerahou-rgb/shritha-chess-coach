@@ -19,6 +19,7 @@ const context = vm.createContext({
   setTimeout(callback, delay) { timers.push({ callback, delay }); return timers.length; },
   clearTimeout() {},
   window: { speechSynthesis:voice, lessonVideos: Object.fromEntries(['board','rook','knight','bishop','queen','king','pawn','capture','escape','promotion','penny','foxy'].map(k=>[k,'data:video/mp4;base64,AAAA'])) },
+  voice,
   speechSynthesis:voice,
   SpeechSynthesisUtterance: class { constructor(text){this.text=text} },
   console,
@@ -66,6 +67,11 @@ assert.equal(node('#movieTry').hidden,true,'practice stays locked until video en
 finishMovie();
 assert.equal(node('#movieTry').hidden,false);
 assert.equal(vm.runInContext('S.intros.rook', context), true);
+vm.runInContext("window.speechSynthesis=null;classMovie('knight')",context);
+node('#movieReplay').onclick();
+finishMovie();
+assert.match(node('#movieStatus').textContent,/Voice did not start/,'completion does not claim voice when speech is unavailable');
+vm.runInContext('delete S.intros.knight;window.speechSynthesis=voice',context);
 vm.runInContext('rook()', context);
 function tap(square) {
   const target = { dataset: { q: square }, closest: () => target, classList: { add() {} } };
